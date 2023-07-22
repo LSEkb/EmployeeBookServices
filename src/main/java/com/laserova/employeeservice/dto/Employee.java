@@ -1,4 +1,4 @@
-package com.laserova.employeeservice;
+package com.laserova.employeeservice.dto;
 
 import java.util.Objects;
 

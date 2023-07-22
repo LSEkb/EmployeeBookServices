@@ -1,6 +1,6 @@
 package com.laserova.employeeservice.controller;
 
-import com.laserova.employeeservice.Employee;
+import com.laserova.employeeservice.dto.Employee;
 import com.laserova.employeeservice.service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,22 +20,22 @@ public class EmployeeController {
 
     @GetMapping("/add")
     public Employee addEmployee(@RequestParam String firstName, @RequestParam String lastName) {
-        return employeeService.add(firstName, lastName);
+        return employeeService.addEmployee(firstName, lastName);
     }
 
     @GetMapping("/remove")
     public Employee removeEmployee(@RequestParam String firstName, @RequestParam String lastName) {
-        return employeeService.remove(firstName, lastName);
+        return employeeService.removeEmployee(firstName, lastName);
     }
 
     @GetMapping("/find")
     public Employee findEmployee(@RequestParam String firstName, @RequestParam String lastName) {
-        return employeeService.find(firstName, lastName);
+        return employeeService.findEmployee(firstName, lastName);
     }
 
-    @GetMapping("/print")
-    public List<Employee> print() {
-        return employeeService.print();
+    @GetMapping()
+    public List<Employee> printAllEmployees() {
+        return employeeService.printAllEmployees();
     }
 
 }
