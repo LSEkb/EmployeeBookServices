@@ -7,11 +7,14 @@ import com.laserova.employeeservice.exceptions.EmployeeStoragesFullException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    private List<Employee> employees;
+    private final List<Employee> employees;
     private static final int MAX_QTY_EMPLOYEES = 10;
 
     public EmployeeServiceImpl() {
@@ -34,24 +37,25 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee removeEmployee(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
-        if (!employees.remove(employee)) {
-            throw new EmployeeNotFoundException("Такой сотрудник не найден");
+        if (employees.contains(employee)) {
+            employees.remove(employee);
+            return employee;
         }
-        return employee;
+        throw new EmployeeNotFoundException("Такой сотрудник не найден");
     }
 
     @Override
     public Employee findEmployee(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
-        if (!employees.contains(employee)) {
-            throw new EmployeeNotFoundException("Такой сотрудник не найден");
+        if (employees.contains(employee)) {
+            return employee;
         }
-        return employee;
+        throw new EmployeeNotFoundException("Такой сотрудник не найден");
     }
 
     @Override
-    public List<Employee> printAllEmployees() {
-        return employees;
+    public Collection <Employee> printAllEmployees() {
+        return Collections.unmodifiableList(employees);
     }
 }
 
