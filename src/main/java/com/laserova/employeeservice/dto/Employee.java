@@ -34,7 +34,7 @@ public class Employee {
             return false;
         }
         Employee employee = (Employee) other;
-        return (lastName == ((Employee) other).getLastName() && firstName == ((Employee) other).getFirstName());
+        return lastName.equals(employee.getLastName()) && firstName.equals(employee.getFirstName());
     }
 
     @Override
