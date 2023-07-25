@@ -5,11 +5,13 @@ import java.util.Objects;
 public class Employee {
     private String lastName;
     private String firstName;
+    public String getFullName;
 
 
     public Employee(String lastName, String firstName) {
         this.lastName = lastName;
         this.firstName = firstName;
+        this.getFullName = firstName + lastName;
     }
 
     public String getLastName() {
@@ -20,9 +22,13 @@ public class Employee {
         return firstName;
     }
 
+    public String getFullName() {
+        return firstName + lastName;
+    }
+
     @Override
     public String toString() {
-        return " ФИО - " + lastName + " " + firstName;
+        return lastName + " " + firstName;
     }
 
     @Override
