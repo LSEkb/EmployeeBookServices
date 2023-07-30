@@ -11,48 +11,49 @@ import java.util.*;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    private final Map<String, Employee> employees;
+    private final Map<String, Employee> employeeMap;
     private static final int MAX_QTY_EMPLOYEES = 10;
 
 
     public EmployeeServiceImpl() {
-        this.employees = new HashMap<>();
+        this.employeeMap = new HashMap<>();
     }
 
     @Override
-    public Employee addEmployee(String firstName, String lastName) {
-        if (employees.size() == MAX_QTY_EMPLOYEES) {
+    public Employee addEmployee(String firstName, String lastName, int department, double salary) {
+        if (employeeMap.size() == MAX_QTY_EMPLOYEES) {
             throw new EmployeeStoragesFullException("Количество сотрудников уже достигло максимально возможного значения");
         }
-        Employee employee = new Employee(firstName, lastName);
-        if (employees.containsKey(employee.getFullName)) {
+        Employee employee = new Employee(firstName, lastName, department, salary);
+        String key = firstName + lastName;
+        if (employeeMap.containsKey(key)) {
             throw new EmployeeAlreadyAddedException("Такой сотрудник уже есть");
         }
-        employees.put(employee.getFullName, employee);
+        employeeMap.put(key, employee);
         return employee;
     }
 
     @Override
     public Employee removeEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
-        if (employees.containsKey(employee.getFullName)) {
-            return employees.remove(employee.getFullName);
+        Employee employee = employeeMap.remove(firstName + lastName);
+        if (Objects.isNull(employee)) {
+            throw new EmployeeNotFoundException("Такой сотрудник не найден");
         }
-        throw new EmployeeNotFoundException("Такой сотрудник не найден");
+        return employee;
     }
 
     @Override
     public Employee findEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
-        if (employees.containsKey(employee.getFullName())) {
-            return employee;
+        Employee employee = employeeMap.get(firstName + lastName);
+        if (Objects.isNull(employee)) {
+            throw new EmployeeNotFoundException("Такой сотрудник не найден");
         }
-        throw new EmployeeNotFoundException("Такой сотрудник не найден");
+        return employee;
     }
 
     @Override
-    public Collection<Employee> printAllEmployees() {
-        return Collections.unmodifiableCollection(employees.values());
+    public Collection<Employee> findAllEmployees() {
+        return employeeMap.values();
     }
 }
 

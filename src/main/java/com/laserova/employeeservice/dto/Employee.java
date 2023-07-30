@@ -5,13 +5,15 @@ import java.util.Objects;
 public class Employee {
     private String lastName;
     private String firstName;
-    public String getFullName;
+    private int department;
+    private double salary;
 
 
-    public Employee(String lastName, String firstName) {
+    public Employee(String lastName, String firstName, int department, double salary) {
         this.lastName = lastName;
         this.firstName = firstName;
-        this.getFullName = firstName + lastName;
+        this.department = department;
+        this.salary = salary;
     }
 
     public String getLastName() {
@@ -22,8 +24,12 @@ public class Employee {
         return firstName;
     }
 
-    public String getFullName() {
-        return firstName + lastName;
+    public int getDepartment() {
+        return department;
+    }
+
+    public double getSalary() {
+        return salary;
     }
 
     @Override
