@@ -2,11 +2,15 @@ package com.laserova.employeeservice.service;
 
 import com.laserova.employeeservice.dto.Employee;
 import com.laserova.employeeservice.exceptions.EmployeeAlreadyAddedException;
+import com.laserova.employeeservice.exceptions.EmployeeIncorrectlyNameException;
 import com.laserova.employeeservice.exceptions.EmployeeNotFoundException;
 import com.laserova.employeeservice.exceptions.EmployeeStoragesFullException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+
+import static org.apache.commons.lang3.StringUtils.capitalize;
+import static org.apache.commons.lang3.StringUtils.containsOnly;
 
 
 @Service
@@ -55,5 +59,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Collection<Employee> findAllEmployees() {
         return employeeMap.values();
     }
+
+    @Override
+    public void verifyName(String name) {
+        if (!containsOnly("^[A-Za-zА-Яа-я ]$")) {
+            throw new EmployeeIncorrectlyNameException("Недопустимые символы в фамилии или имени сотрудника");
+        }
+    }
+
+    @Override
+    public String exportName(String name) {
+        return capitalize(name);
+    }
+
 }
 

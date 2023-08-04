@@ -12,4 +12,8 @@ public interface EmployeeService {
     Employee findEmployee(String firstName, String lastName);
 
     Collection<Employee> findAllEmployees();
+
+    void verifyName (String name);
+
+    String exportName (String name);
 }

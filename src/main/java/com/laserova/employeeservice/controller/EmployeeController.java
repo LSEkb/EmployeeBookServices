@@ -15,11 +15,16 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService) {
+
         this.employeeService = employeeService;
     }
 
     @GetMapping("/add")
     public Employee addEmployee(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int departmentId, @RequestParam double salary) {
+        employeeService.verifyName(firstName);
+        employeeService.verifyName(lastName);
+        employeeService.exportName(firstName);
+        employeeService.exportName(lastName);
         return employeeService.addEmployee(firstName, lastName, departmentId, salary);
     }
 
@@ -35,6 +40,7 @@ public class EmployeeController {
 
     @GetMapping
     public Collection<Employee> printAllEmployees() {
+
         return employeeService.findAllEmployees();
     }
 
