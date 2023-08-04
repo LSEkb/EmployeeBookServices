@@ -1,7 +1,9 @@
-package com.laserova.employeeservice.service;
+package com.laserova.employeeservice.service.Impl;
 
 import com.laserova.employeeservice.dto.Employee;
 import com.laserova.employeeservice.exceptions.EmployeeNotFoundException;
+import com.laserova.employeeservice.service.DepartmentService;
+import com.laserova.employeeservice.service.EmployeeService;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;

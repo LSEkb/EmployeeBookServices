@@ -13,8 +13,7 @@ public interface EmployeeService {
 
     Collection<Employee> findAllEmployees();
 
-    void verifyName (String name);
+    void verifyName (String firstName, String lastName);
 
     String exportName (String name);
-    String adaptName(String name);
 }

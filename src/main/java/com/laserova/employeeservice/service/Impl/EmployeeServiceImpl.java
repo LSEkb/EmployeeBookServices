@@ -1,10 +1,11 @@
-package com.laserova.employeeservice.service;
+package com.laserova.employeeservice.service.Impl;
 
 import com.laserova.employeeservice.dto.Employee;
 import com.laserova.employeeservice.exceptions.EmployeeAlreadyAddedException;
 import com.laserova.employeeservice.exceptions.EmployeeIncorrectlyNameException;
 import com.laserova.employeeservice.exceptions.EmployeeNotFoundException;
 import com.laserova.employeeservice.exceptions.EmployeeStoragesFullException;
+import com.laserova.employeeservice.service.EmployeeService;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -62,8 +63,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void verifyName(String name) {
-        if (!isAlpha(name)) {
+    public void verifyName(String firstName, String lastName) {
+        if (!isAlpha(firstName+lastName)) {
             throw new EmployeeIncorrectlyNameException("Недопустимые символы в фамилии или имени сотрудника");
         }
     }
@@ -73,13 +74,5 @@ public class EmployeeServiceImpl implements EmployeeService {
         System.out.println(capitalize(name));
         return capitalize(name);
     }
-
-    @Override
-    public String adaptName(String name) {
-        verifyName(name);
-        exportName(name);
-        return name;
-    }
-
 }
 
