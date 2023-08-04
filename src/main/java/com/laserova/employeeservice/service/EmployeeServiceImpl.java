@@ -9,8 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-import static org.apache.commons.lang3.StringUtils.capitalize;
-import static org.apache.commons.lang3.StringUtils.containsOnly;
+import static org.apache.commons.lang3.StringUtils.*;
 
 
 @Service
@@ -20,6 +19,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     public EmployeeServiceImpl() {
+
         this.employeeMap = new HashMap<>();
     }
 
@@ -57,19 +57,28 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Collection<Employee> findAllEmployees() {
+
         return employeeMap.values();
     }
 
     @Override
     public void verifyName(String name) {
-        if (!containsOnly("^[A-Za-zА-Яа-я ]$")) {
+        if (!isAlpha(name)) {
             throw new EmployeeIncorrectlyNameException("Недопустимые символы в фамилии или имени сотрудника");
         }
     }
 
     @Override
     public String exportName(String name) {
+        System.out.println(capitalize(name));
         return capitalize(name);
+    }
+
+    @Override
+    public String adaptName(String name) {
+        verifyName(name);
+        exportName(name);
+        return name;
     }
 
 }

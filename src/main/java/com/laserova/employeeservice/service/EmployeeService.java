@@ -16,4 +16,5 @@ public interface EmployeeService {
     void verifyName (String name);
 
     String exportName (String name);
+    String adaptName(String name);
 }

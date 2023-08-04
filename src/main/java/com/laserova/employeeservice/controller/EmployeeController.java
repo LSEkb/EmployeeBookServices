@@ -21,10 +21,9 @@ public class EmployeeController {
 
     @GetMapping("/add")
     public Employee addEmployee(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int departmentId, @RequestParam double salary) {
-        employeeService.verifyName(firstName);
-        employeeService.verifyName(lastName);
-        employeeService.exportName(firstName);
-        employeeService.exportName(lastName);
+        employeeService.adaptName(firstName);
+        employeeService.adaptName(lastName);
+
         return employeeService.addEmployee(firstName, lastName, departmentId, salary);
     }
 
