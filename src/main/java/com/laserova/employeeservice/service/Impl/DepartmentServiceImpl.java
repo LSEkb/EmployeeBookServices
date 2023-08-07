@@ -25,16 +25,16 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Employee findMaxSalaryEmployee(int department) {
         return employeeService.findAllEmployees().stream()
                 .filter(e -> e.getDepartment() == department)
-                .max(Comparator.comparingDouble(em -> em.getSalary()))
-                .orElseThrow(() -> new EmployeeNotFoundException("В отделе " + department + " нет сотрудников"));
+                .max(Comparator.comparingDouble(Employee::getSalary))
+                .orElseThrow(EmployeeNotFoundException::new);
     }
 
     @Override
     public Employee findMinSalaryEmployee(int department) {
         return employeeService.findAllEmployees().stream()
                 .filter(e -> e.getDepartment() == department)
-                .min(Comparator.comparingDouble(em -> em.getSalary()))
-                .orElseThrow(() -> new EmployeeNotFoundException("В отделе " + department + " нет сотрудников"));
+                .min(Comparator.comparingDouble(Employee::getSalary))
+                .orElseThrow(EmployeeNotFoundException::new);
     }
 
     @Override

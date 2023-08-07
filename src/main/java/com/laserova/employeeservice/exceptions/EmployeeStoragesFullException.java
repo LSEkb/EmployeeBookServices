@@ -5,9 +5,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
-@ResponseStatus(BAD_REQUEST)
+@ResponseStatus(code = HttpStatus.BAD_REQUEST,reason = "Добавить еще одного сотрудника невозможно - нет вакантных мест")
 public class EmployeeStoragesFullException extends RuntimeException{
-    public EmployeeStoragesFullException (String message){
-        super(message);
-    }
 }
