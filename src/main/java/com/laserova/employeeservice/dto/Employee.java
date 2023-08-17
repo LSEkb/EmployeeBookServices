@@ -9,21 +9,19 @@ public class Employee {
     private double salary;
 
 
-    public Employee(String lastName, String firstName, int department, double salary) {
-        this.lastName = lastName;
+    public Employee(String firstName, String lastName, int department, double salary) {
         this.firstName = firstName;
+        this.lastName = lastName;
         this.department = department;
         this.salary = salary;
-    }
-
-    public String getLastName() {
-        return lastName;
     }
 
     public String getFirstName() {
         return firstName;
     }
-
+    public String getLastName() {
+        return lastName;
+    }
     public int getDepartment() {
         return department;
     }
@@ -34,7 +32,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return lastName + " " + firstName;
+        return firstName + " " + lastName + " " + department + " " + salary;
     }
 
     @Override
@@ -46,7 +44,8 @@ public class Employee {
             return false;
         }
         Employee employee = (Employee) other;
-        return lastName.equals(employee.getLastName()) && firstName.equals(employee.getFirstName());
+        return lastName.equals(employee.getLastName()) && firstName.equals(employee.getFirstName())&&
+                department==employee.getDepartment()&&salary==employee.getSalary();
     }
 
     @Override
