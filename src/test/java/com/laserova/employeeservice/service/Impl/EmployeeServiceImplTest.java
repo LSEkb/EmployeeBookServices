@@ -82,8 +82,6 @@ class EmployeeServiceImplTest {
         underTest.addEmployee(employee.getFirstName(), employee.getLastName(),
                 employee.getDepartment(), employee.getSalary());
         Collection <Employee> result = underTest.findAllEmployees();
-        Set<Employee> expect = new HashSet<>();
-        expect.add(employee);
-        assertIterableEquals(expect, result);
+        assertIterableEquals(Set.of(employee), result);
     }
 }

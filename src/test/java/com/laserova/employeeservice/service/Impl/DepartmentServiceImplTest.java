@@ -78,16 +78,20 @@ class DepartmentServiceImplTest {
     void getAll_HaveEmployeeInDepartment_returnEmployeeCollectionsInDepartment() {
         when(employeeService.findAllEmployees()).thenReturn(employees);
         Collection<Employee> result = underTest.getAll(1);
-        assertIterableEquals(Arrays.asList(new Employee[]{alex, ivan, irina,}), result);
+        assertIterableEquals(List.of(alex, ivan, irina), result);
     }
 
     @Test
     void getAllGroupingByDepartment_HaveEmployeeInDepartment_returnEmployeeCollectionsGroupingByDepartment() {
         when(employeeService.findAllEmployees()).thenReturn(employees);
         Map<Integer, List<Employee>> result = underTest.getAllGroupingByDepartment();
-        Map<Integer, List<Employee>> expect = employeeService.findAllEmployees().stream()
-                .collect(Collectors.groupingBy(e ->e.getDepartment()));
-        assertEquals(expect, result);
+        assertEquals(Map.of(1, List.of(alex,ivan, irina), 3, List.of(mark)), result);
     }
 
+    @Test
+    void getAllGroupingByDepartment_HasNoEmployee_returnEmptyCollections() {
+        when(employeeService.findAllEmployees()).thenReturn(Collections.emptyList());
+        Map<Integer, List<Employee>> result = underTest.getAllGroupingByDepartment();
+        assertEquals( Collections.EMPTY_MAP, result);
+    }
 }
